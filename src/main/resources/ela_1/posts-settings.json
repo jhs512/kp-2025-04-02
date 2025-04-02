@@ -1,0 +1,30 @@
+{
+  "analysis": {
+    "tokenizer": {
+      "my_nori_tokenizer": {
+        "type": "nori_tokenizer",
+        "user_dictionary": "user_dict.txt"
+      }
+    },
+    "analyzer": {
+      "korean": {
+        "type": "custom",
+        "tokenizer": "my_nori_tokenizer",
+        "filter": [
+          "lowercase",
+          "nori_part_of_speech",
+          "nori_readingform",
+          "nori_number",
+          "one_way_synonym"
+        ]
+      }
+    },
+    "filter": {
+      "one_way_synonym": {
+        "type": "synonym",
+        "expand": false,
+        "synonyms_path": "user_synonyms.txt"
+      }
+    }
+  }
+}

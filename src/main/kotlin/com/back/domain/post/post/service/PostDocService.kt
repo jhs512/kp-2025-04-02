@@ -5,7 +5,6 @@ import com.back.domain.post.post.repository.PostDocRepository
 import com.github.f4b6a3.tsid.TsidCreator
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
-import org.springframework.data.domain.Sort
 import org.springframework.data.elasticsearch.NoSuchIndexException
 import org.springframework.data.elasticsearch.UncategorizedElasticsearchException
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations
@@ -64,22 +63,14 @@ class PostDocService(
             .findByOrderByIdAsc()
     }
 
-    fun findPageByKwOrderByIdDesc(kw: String): Page<PostDoc> {
+    fun findPageByKwOrder(kw: String): Page<PostDoc> {
         return postDocRepository
             .findPageByTitleOrContent(
                 kw,
                 kw,
                 PageRequest.of(
-                    0, 10,
-                    Sort.by(
-                        Sort.Order.desc("id")
-                    )
+                    0, 10
                 ),
             )
-    }
-
-    fun findByKwOrderByIdDesc(kw: String): List<PostDoc> {
-        return postDocRepository
-            .findByTitleContainingOrContentContainingOrderByIdDesc(kw, kw)
     }
 }

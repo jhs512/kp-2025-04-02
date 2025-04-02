@@ -18,16 +18,7 @@ class ApiV1PostSearchController(
         @RequestParam(defaultValue = "") kw: String,
     ): Page<PostDto> {
         return postDocService
-            .findPageByKwOrderByIdDesc(kw)
-            .map { PostDto.from(it) }
-    }
-
-    @GetMapping("/v2")
-    fun getItemsV2(
-        @RequestParam(defaultValue = "") kw: String,
-    ): List<PostDto> {
-        return postDocService
-            .findByKwOrderByIdDesc(kw)
+            .findPageByKwOrder(kw)
             .map { PostDto.from(it) }
     }
 }
