@@ -3,6 +3,7 @@ package com.back.domain.post.post.service
 import com.back.domain.post.post.entity.PostDoc
 import com.back.domain.post.post.repository.PostDocRepository
 import com.github.f4b6a3.tsid.TsidCreator
+import org.springframework.ai.embedding.EmbeddingModel
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.elasticsearch.NoSuchIndexException
@@ -15,7 +16,8 @@ import java.time.LocalDateTime
 @Service
 class PostDocService(
     private val elasticsearchOperations: ElasticsearchOperations,
-    private val postDocRepository: PostDocRepository
+    private val postDocRepository: PostDocRepository,
+    private val embeddingModel: EmbeddingModel
 ) {
     fun deleteIndex() {
         try {
@@ -45,6 +47,7 @@ class PostDocService(
                 modifyDate = LocalDateTime.now(),
                 title = title,
                 content = content,
+                embedding = embeddingModel.embed(content)
             )
         )
     }

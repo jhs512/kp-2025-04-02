@@ -9,7 +9,7 @@ import java.time.LocalDateTime
 
 @Document(indexName = "app1_posts")
 @Setting(settingPath = "/ela_1/posts-settings.json")
-data class PostDoc(
+class PostDoc(
     @Id
     @Field(type = FieldType.Keyword)
     val id: String,
@@ -25,4 +25,7 @@ data class PostDoc(
 
     @Field(type = FieldType.Text, analyzer = "korean")
     var content: String,
+
+    @Field(type = FieldType.Dense_Vector, dims = 384)
+    val embedding: FloatArray,
 )

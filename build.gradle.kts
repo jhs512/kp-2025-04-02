@@ -5,6 +5,7 @@ plugins {
     id("io.spring.dependency-management") version "1.1.7"
     kotlin("plugin.jpa") version "1.9.25"
 }
+val springAiVersion by extra("1.0.0-M6")
 
 group = "com"
 version = "0.0.1-SNAPSHOT"
@@ -25,6 +26,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("org.springframework.ai:spring-ai-transformers-spring-boot-starter")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     runtimeOnly("com.h2database:h2")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
@@ -36,6 +38,11 @@ dependencies {
 kotlin {
     compilerOptions {
         freeCompilerArgs.addAll("-Xjsr305=strict")
+    }
+}
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.ai:spring-ai-bom:$springAiVersion")
     }
 }
 

@@ -13,8 +13,6 @@
         "filter": [
           "lowercase",
           "nori_part_of_speech",
-          "nori_readingform",
-          "nori_number",
           "one_way_synonym"
         ]
       }
