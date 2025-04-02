@@ -1,0 +1,8 @@
+logging:
+  level:
+    org.springframework.data.elasticsearch.client.WIRE: TRACE
+    org.springframework.data.elasticsearch.core: TRACE
+    org.elasticsearch.client: TRACE
+    tracer: TRACE
+    org.apache.http: DEBUG
+    org.apache.http.wire: DEBUG

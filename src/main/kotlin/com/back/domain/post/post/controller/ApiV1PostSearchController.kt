@@ -2,6 +2,7 @@ package com.back.domain.post.post.controller
 
 import com.back.domain.post.post.dto.PostDto
 import com.back.domain.post.post.service.PostDocService
+import org.springframework.data.domain.Page
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
@@ -15,15 +16,18 @@ class ApiV1PostSearchController(
     @GetMapping
     fun getItems(
         @RequestParam(defaultValue = "") kw: String,
-    ): List<PostDto> {
-        if (kw.isNotBlank()) {
-            return postDocService
-                .findByKwOrderByIdDesc(kw)
-                .map { PostDto.from(it) }
-        }
-
+    ): Page<PostDto> {
         return postDocService
-            .findByOrderByIdDesc()
+            .findPageByKwOrderByIdDesc(kw)
+            .map { PostDto.from(it) }
+    }
+
+    @GetMapping("/v2")
+    fun getItemsV2(
+        @RequestParam(defaultValue = "") kw: String,
+    ): List<PostDto> {
+        return postDocService
+            .findByKwOrderByIdDesc(kw)
             .map { PostDto.from(it) }
     }
 }
