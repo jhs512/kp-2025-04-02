@@ -18,6 +18,7 @@ services:
     volumes:
       - elasticsearch-data:/usr/share/elasticsearch/data
       - ./ela_1/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - ./ela_1/user_dict.txt:/usr/share/elasticsearch/config/user_dict.txt
     ports:
       - "9200:9200"
     networks:

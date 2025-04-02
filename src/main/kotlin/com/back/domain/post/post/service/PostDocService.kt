@@ -1,6 +1,6 @@
 package com.back.domain.post.post.service
 
-import com.back.domain.post.post.entity.PostDoc
+import com.back.domain.post.post.document.PostDoc
 import com.back.domain.post.post.repository.PostDocRepository
 import com.github.f4b6a3.tsid.TsidCreator
 import org.springframework.data.elasticsearch.NoSuchIndexException
