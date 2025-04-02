@@ -4,6 +4,7 @@ import com.back.domain.post.post.dto.PostDto
 import com.back.domain.post.post.service.PostDocService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
@@ -12,17 +13,17 @@ class ApiV1PostSearchController(
     private val postDocService: PostDocService
 ) {
     @GetMapping
-    fun getItems(): List<PostDto> {
+    fun getItems(
+        @RequestParam(defaultValue = "") kw: String,
+    ): List<PostDto> {
+        if (kw.isNotBlank()) {
+            return postDocService
+                .findByKwOrderByIdDesc(kw)
+                .map { PostDto.from(it) }
+        }
+
         return postDocService
-            .findByOrderByIdAsc()
-            .map {
-                PostDto(
-                    id = it.id,
-                    createDate = it.createDate,
-                    modifyDate = it.modifyDate,
-                    title = it.title,
-                    content = it.content
-                )
-            }
+            .findByOrderByIdDesc()
+            .map { PostDto.from(it) }
     }
 }

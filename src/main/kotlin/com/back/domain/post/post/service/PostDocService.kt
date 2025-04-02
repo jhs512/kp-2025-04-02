@@ -60,4 +60,9 @@ class PostDocService(
         return postDocRepository
             .findByOrderByIdAsc()
     }
+
+    fun findByKwOrderByIdDesc(kw: String): List<PostDoc> {
+        return postDocRepository
+            .findByTitleContainingOrContentContainingOrderByIdDesc(kw, kw)
+    }
 }
