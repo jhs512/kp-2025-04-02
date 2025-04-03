@@ -76,4 +76,45 @@ class PostDocService(
                 ),
             )
     }
+
+    fun findPageV2ByKwOrder(kw: String): Page<PostDoc> {
+        return postDocRepository
+            .findPageV2ByTitleOrContent(
+                kw,
+                kw,
+                PageRequest.of(
+                    0, 10
+                ),
+            )
+    }
+
+    fun findPageV3ByKwOrder(kw: String): Page<PostDoc> {
+        return postDocRepository
+            .findPageV3ByTitleOrContent(
+                kw,
+                kw,
+                PageRequest.of(
+                    0, 10
+                ),
+            )
+    }
+
+    fun findPageV4ByKwOrder(kw: String): Page<PostDoc> {
+        return postDocRepository
+            .findPageV4ByTitleOrContent(
+                kw,
+                kw,
+                PageRequest.of(
+                    0, 10
+                ),
+            )
+    }
+
+    fun count(): Long {
+        return try {
+            return postDocRepository.count()
+        } catch (_: NoSuchIndexException) {
+            0L
+        }
+    }
 }

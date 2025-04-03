@@ -22,7 +22,7 @@ class PostDocCustomRepositoryImpl(
                         b.should(
                             listOf(
                                 MatchQuery.of { m -> m.field("title").query(kw1) }._toQuery(),
-                                MatchQuery.of { m -> m.field("content").query(kw1) }._toQuery(),
+                                MatchQuery.of { m -> m.field("content").query(kw2) }._toQuery(),
                             )
                         )
                     }

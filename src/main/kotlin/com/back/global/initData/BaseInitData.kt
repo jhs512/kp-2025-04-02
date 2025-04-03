@@ -23,6 +23,7 @@ class BaseInitData(
     }
 
     fun work1() {
+        if (postDocService.count() > 0) return
         postDocService.deleteIndex()
         postDocService.createIndex()
 
@@ -80,6 +81,13 @@ class BaseInitData(
         심리학과에 재학 중이며, 사람의 마음과 행동에 대해 깊이 이해하고 싶습니다.
         최근에는 웹 개발도 함께 배우고 있으며, 다양한 기술을 접하는 중입니다.
         잘 부탁드립니다!
+    """.trimIndent()
+        )
+
+        postDocService.add(
+            "저는 김한솔이고, 10살 초등학생입니다.",
+            """
+        저는 밥도 잘먹고, 친구들과 사이좋게 지냅니다. 그리고 게임을 좋아합니다.
     """.trimIndent()
         )
     }
